@@ -1,0 +1,59 @@
+[
+  {
+    "id": "AeHIrLTr6JkxGE6SN-0Rw",
+    "client": {
+      "firstName": "Anna",
+      "lastName": "Kowalska",
+      "email": "anna.kowalska@example.com",
+      "phone": "123-456-789"
+    },
+    "appointmentDateTime": "2023-08-10T15:30:00",
+    "service": {
+      "name": "Manicure",
+      "description": "Classic manicure with nail polish application."
+    },
+    "cosmetician": {
+      "firstName": "Ewa",
+      "lastName": "Nowak"
+    },
+    "status": "confirmed"
+  },
+  {
+    "id": "AeHIrLTr6Jkxhgfgh6SN-0Rw",
+    "client": {
+      "firstName": "Ola",
+      "lastName": "Kowalska",
+      "email": "anna.kowalska@example.com",
+      "phone": "123-456-789"
+    },
+    "appointmentDateTime": "2023-08-11T15:30:00",
+    "service": {
+      "name": "Manicure",
+      "description": "Classic manicure with nail polish application."
+    },
+    "cosmetician": {
+      "firstName": "Ewa",
+      "lastName": "Nowak"
+    },
+    "status": "confirmed"
+  },
+  {
+    "id": "AeHIrLTr6JfhxGE6SN-0Rw",
+    "client": {
+      "firstName": "Maria",
+      "lastName": "Kowalska",
+      "email": "anna.kowalska@example.com",
+      "phone": "123-456-789"
+    },
+    "appointmentDateTime": "2023-08-10T15:30:00",
+    "service": {
+      "name": "Manicure",
+      "description": "Classic manicure with nail polish application."
+    },
+    "cosmetician": {
+      "firstName": "Ewa",
+      "lastName": "Nowak"
+    },
+    "status": "confirmed"
+  }
+]
