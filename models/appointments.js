@@ -94,7 +94,30 @@ const addAppointment = async (newAppointment) => {
   }
 };
 
-const deleteAppointment = async (appointmentsId) => {};
+const deleteAppointment = async (appointmentId) => {
+  try {
+    const appointmentsData = await listAppointments();
+    const index = appointmentsData.findIndex(
+      (appointment) => appointment.id === appointmentId
+    );
+
+    if (index !== -1) {
+      appointmentsData.splice(index, 1);
+      const filePath = path.join(__dirname, "appointments.json");
+      await fs.writeFile(
+        filePath,
+        JSON.stringify(appointmentsData, null, 2),
+        "utf-8"
+      );
+      return true;
+    } else {
+      console.error("Rezerwacja o podanym identyfikatorze nie istnieje.");
+      return false;
+    }
+  } catch (error) {
+    throw new Error("Błąd");
+  }
+};
 
 module.exports = {
   listAppointments,

@@ -1,5 +1,5 @@
 const express = require("express");
-const { listAppointments, getAppointmentsByDate, getAppointmentsByDateTime, getAppointmentsByClientName, getAppointmentsByCosmeticianName, addAppointment } = require("../../models/appointments");
+const { listAppointments, getAppointmentsByDate, getAppointmentsByDateTime, getAppointmentsByClientName, getAppointmentsByCosmeticianName, addAppointment, deleteAppointment } = require("../../models/appointments");
 
 const router = express.Router();
 
@@ -82,6 +82,20 @@ router.post("/", async (req, res) => {
     }
 });
 
-router.delete("/:id", async (req, res) => {});
+router.delete("/:id", async (req, res) => {
+    try {
+      const appointmentId = req.params.id;
+
+      const isDeleted = await deleteAppointment(appointmentId);
+      if (isDeleted) {
+        return res.status(200).json({ message: "contact deleted" });
+      } else {
+        return res.status(404).json({ message: "Not found" });
+      }
+    } catch (error) {
+      console.error("Error handling DELETE /api/appointments/:id", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 
 module.exports = router;
