@@ -1,5 +1,5 @@
 const express = require("express");
-const { listAppointments, getAppointmentsByDate, getAppointmentsByDateTime, getAppointmentsByClientName, getAppointmentsByCosmeticianName } = require("../../models/appointments");
+const { listAppointments, getAppointmentsByDate, getAppointmentsByDateTime, getAppointmentsByClientName, getAppointmentsByCosmeticianName, addAppointment } = require("../../models/appointments");
 
 const router = express.Router();
 
@@ -71,7 +71,16 @@ router.get("/by-cosmetician", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {});
+router.post("/", async (req, res) => {
+    try {
+      const newAppointment = req.body;
+      const addedAppointment = await addAppointment(newAppointment);
+      res.status(201).json(addedAppointment);
+    } catch (error) {
+      console.error("Error handling POST /api/appointments", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 
 router.delete("/:id", async (req, res) => {});
 

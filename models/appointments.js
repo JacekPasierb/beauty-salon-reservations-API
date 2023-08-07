@@ -1,5 +1,6 @@
 const path = require("path");
 const fs = require("fs/promises");
+const { v4: uuidv4 } = require("uuid");
 
 const listAppointments = async () => {
   try {
@@ -70,9 +71,30 @@ const getAppointmentsByCosmeticianName = async (firstName, lastName) => {
   }
 };
 
-const deleteAppointment = async (appointmentsId) => {};
+const addAppointment = async (newAppointment) => {
+  try {
+    const newId = uuidv4();
 
-const addAppointment = async (newAppointment) => {};
+    const appointment = {
+      id: newId,
+      ...newAppointment,
+    };
+
+    const appointmentsData = await listAppointments();
+    appointmentsData.push(appointment);
+    const filePath = path.join(__dirname, "appointments.json");
+    await fs.writeFile(
+      filePath,
+      JSON.stringify(appointmentsData, null, 2),
+      "utf-8"
+    );
+    return appointment;
+  } catch (error) {
+    throw new Error("Błąd podczas dodawania rezerwacji.");
+  }
+};
+
+const deleteAppointment = async (appointmentsId) => {};
 
 module.exports = {
   listAppointments,
