@@ -13,18 +13,7 @@ const listAppointments = async () => {
   }
 };
 
-const getAppointmentsByDate = async (date) => {
-  try {
-    const appointmentsData = await listAppointments();
-    const filteredAppointments = appointmentsData.filter((appointment) => {
-      return appointment.appointmentDateTime.startsWith(date);
-    });
-    return filteredAppointments;
-  } catch (error) {
-    console.error("Błąd podczas pobierania rezerwacji:", error);
-  }
-};
-const getAppointmentsByDateTime = async (dateTime) => {
+const getAppointmentsByDate = async (dateTime) => {
   try {
     const appointmentsData = await listAppointments();
     const filteredAppointments = appointmentsData.filter((appointment) => {
@@ -122,7 +111,6 @@ const deleteAppointment = async (appointmentId) => {
 module.exports = {
   listAppointments,
   getAppointmentsByDate,
-  getAppointmentsByDateTime,
   getAppointmentsByClientName,
   getAppointmentsByCosmeticianName,
   deleteAppointment,

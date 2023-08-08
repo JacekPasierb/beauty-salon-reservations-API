@@ -29,7 +29,6 @@ const appointmentSchema = Joi.object({
 const {
   listAppointments,
   getAppointmentsByDate,
-  getAppointmentsByDateTime,
   getAppointmentsByClientName,
   getAppointmentsByCosmeticianName,
   addAppointment,
@@ -48,34 +47,21 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/by-date", async (req, res, next) => {
+router.get("/by-date", async (req, res) => {
   try {
-    const time = req.query.time;
-    if (time) {
-      return next();
-    }
     const date = req.query.date;
-    const appointmentsDate = await getAppointmentsByDate(date);
+    const time = req.query.time;
+    const dateTime = time ? `${date}T${time}` : `${date}` ;
+  
+
+    const appointmentsDate = await getAppointmentsByDate(dateTime);
     res.status(200).json(appointmentsDate);
   } catch (error) {
     console.error("Error handling GET /api/appointments/by-date", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-router.get("/by-date", async (req, res) => {
-  try {
-    const date = req.query.date;
-    const time = req.query.time;
-    const dateTime = `${date}T${time}`;
-    console.log(dateTime);
 
-    const appointmentsDateTime = await getAppointmentsByDateTime(dateTime);
-    res.status(200).json(appointmentsDateTime);
-  } catch (error) {
-    console.error("Error handling GET /api/appointments/by-date", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
 
 router.get("/by-client", async (req, res) => {
   try {
